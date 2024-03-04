@@ -21,3 +21,5 @@
 4. Deploy Streamlit application
 <a href="https://andrewputrahartanto.streamlit.app/" target="_blank">Project Demo</a>
 
+### Screenshot
+<img src="./screenshot/ss1.png" width="400px">
