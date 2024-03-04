@@ -1,3 +1,4 @@
+#Import Library
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -6,19 +7,35 @@ import streamlit as st
 
 st.set_page_config(layout="wide")
 
-st.title("Proyek Analisis Data: Bike Sharing Dataset")
+# Set Title
+st.title("Bike Sharing Dashboard")
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["Visualisasi 1", 
                                         "Visualisasi 2", 
                                         "Visualisasi 3", 
                                         "Visualisasi 4", 
                                         "Analisis Lanjutan"])
 
+# Load Dataset
 day_df = pd.read_csv("https://raw.githubusercontent.com/andrewputrahartanto/Proyek_Analisis_Data/main/data/day.csv")
 hour_df = pd.read_csv("https://raw.githubusercontent.com/andrewputrahartanto/Proyek_Analisis_Data/main/data/hour.csv")
 
+# Change Data Type
 day_df["dteday"] = pd.to_datetime(day_df["dteday"])
 hour_df["dteday"] = pd.to_datetime(hour_df["dteday"])
 
+# Sidebar
+with st.sidebar:
+    st.image("https://raw.githubusercontent.com/andrewputrahartanto/Proyek_Analisis_Data/main/Logo%20Bike.png")
+    st.sidebar.title("Bike Sharing")
+    st.sidebar.markdown("**• Nama: Andrew Putra Hartanto**")
+    st.sidebar.markdown(
+        "**• Dataset: [Download](https://raw.githubusercontent.com/andrewputrahartanto/Proyek_Analisis_Data/main/dashboard/main_data.csv)**")
+    st.sidebar.markdown(
+        "**• Github: [Link](https://github.com/andrewputrahartanto/Proyek_Analisis_Data.git)**")
+    st.sidebar.markdown(
+        "**• Streamlit: [Link](https://andrewputrahartanto.streamlit.app/)**")
+
+# Add content to Tab 1
 with tab1:
     st.header("Bagaimana Perbandingan Pengguna Bike Sharing Pada Tahun 2011 dan 2012?")
     tahun_df = day_df.resample("Y", on="dteday").sum()
@@ -39,6 +56,7 @@ with tab1:
     st.pyplot(fig)
     st.caption("Kesimpulan: Pada **tahun 2012** terjadi **lonjakan** yang **sangat besar** **dibandingkan** **tahun 2011**. Pengguna bike sharing pada **tahun 2011** sebesar **1.243.103** pengguna sedangkan **tahun 2012** sebesar **2.049.576** pengguna")
 
+# Add content to Tab 2
 with tab2:
     st.header("Bagaimana Tren Pengguna Bike Sharing Setiap Bulan?")
     bulan_df = day_df.resample("M", on="dteday").sum()
@@ -63,6 +81,7 @@ with tab2:
     st.pyplot(fig)
     st.caption("Kesimpulan: Tren pengguna bike sharing setiap bulannya pada tahun 2011 dan 2012 cenderung **berfluktuasi**. Tren pengguna bike sharing pada Bulan **Januari 2011** sampai **Juni 2011 meningkat**, sedangkan pada Bulan **Juni 2011** sampai **Desember 2011** cenderung **menurun**. Pada Bulan **Desember 2021** sampai **September 2012** cenderung **meningkat** kembali, namun pada Bulan **September 2012** hingga **Desember 2012** mengalami **penurunan** kembali. **Puncak** pengguna bike sharing terjadi pada Bulan **September 2012**")
 
+# Add content to Tab 3
 with tab3:
     st.header("Bagaimana Traffic Pengguna Bike Sharing Setiap Jam?")
     hour_map = {0:'12 am', 1: '01 am', 2: '02 am', 3: '03 am', 4: '04 am',
@@ -95,6 +114,7 @@ with tab3:
     st.pyplot(fig)
     st.caption("Kesimpulan: Traffic bike sharing **tertinggi** terjadi pada pukul **05 PM** yaitu sebesar **336.860** pengguna, urutan **kedua** pada pukul **06 PM** yaitu sebesar **309.772** pengguna, dan urutan **ketiga** pada pukul **08 AM** yaitu sebesar **261.001** pengguna. Sedangkan traffic bike sharing **terendah** terjadi pada pukul **04 AM** yaitu sebesar **4.428** pengguna")
 
+# Add content to Tab 4
 with tab4:
     st.header("Bagaimana Komposisi Tipe Pengguna Bike Sharing?")
     user_composition_df = hour_df[['casual', 'registered']].sum()
@@ -111,6 +131,7 @@ with tab4:
     st.pyplot(fig)
     st.caption("Kesimpulan: Bike sharing lebih di dominasi oleh pengguna yang telah **terdaftar** yaitu sebesar **81.2%** dan sisanya sebesar **18.8%** oleh pengguna **kasual**")
 
+# Add content to Tab 5
 with tab5:
     st.header("Teknik Analisis Lanjutan: ***RFM Analysis***")
     # Menghitung rfm
