@@ -22,4 +22,4 @@
 <a href="https://andrewputrahartanto.streamlit.app/" target="_blank">Project Demo</a>
 
 ### Screenshot
-<img src="./screenshot/ss1.png" width="400px">
+![alt text](https://github.com/andrewputrahartanto/Proyek_Analisis_Data/blob/main/Screenshot%20Dashboard.png?raw=true)
